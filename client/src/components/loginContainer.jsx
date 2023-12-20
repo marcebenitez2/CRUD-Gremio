@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { saveLocalStorage } from "../services/localStorage";
 
 function LoginContainer() {
   const [email, setEmail] = useState("");
@@ -18,9 +19,13 @@ function LoginContainer() {
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
-
       const data = await response.json();
-      console.log("Respuesta del servidor:", data);
+
+      const emailResponse = data.email;
+      const usernameResponse = data.username;
+      saveLocalStorage(emailResponse, usernameResponse);
+
+      window.location.href = "/menu";
     } catch (error) {
       console.log(error);
     }
