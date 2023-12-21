@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import loginRoute from "./routes/login.js";
 import afiliadosRoute from "./routes/afiliados.js";
+import empresasRoute from "./routes/empresas.js";
 
 // Crear la aplicacion express
 const app = express();
@@ -16,6 +17,8 @@ app.use("/login", loginRoute);
 
 // app.use('/afiliados',)
 app.use("/afiliados", afiliadosRoute);
+
+app.use("/empresas",empresasRoute)
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {

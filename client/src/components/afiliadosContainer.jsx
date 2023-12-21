@@ -42,7 +42,7 @@ function AfiliadosContainer({ afiliadosArray, setSeleccionado }) {
           </thead>
           <tbody>
             {afiliadosFiltrados.map((x) => (
-              <tr key={x.id} className="text-center">
+              <tr key={x.id} className="text-center hover:bg-red-800 transition-all duration-100 cursor-pointer" onClick={()=>setSeleccionado(x)}>
                 <td className="border border-zinc-500">{x.name}</td>
                 <td className="border border-zinc-500">{x.surname}</td>
                 <td className="border border-zinc-500">{x.dni}</td>

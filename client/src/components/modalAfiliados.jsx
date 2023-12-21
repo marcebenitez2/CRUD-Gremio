@@ -1,7 +1,23 @@
 import React from "react";
+import { useState } from "react";
 
-function ModalAfiliados({ openModal, closeModal, seleccionado }) {
+function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
   if (!openModal) return null;
+
+  console.log(seleccionado);
+
+  const [nombre, setNombre] = useState(seleccionado ? seleccionado.name : "");
+  const [apellido, setApellido] = useState(
+    seleccionado ? seleccionado.surname : ""
+  );
+  const [dni, setDni] = useState(seleccionado ? seleccionado.dni : "");
+  const [nacimiento, setNacimiento] = useState(
+    seleccionado ? seleccionado.birth : ""
+  );
+  const [empresa, setEmpresa] = useState(
+    seleccionado ? seleccionado.company_name : ""
+  );
+  const [activo, setActivo] = useState(seleccionado ? seleccionado.state : "");
 
   return (
     <div className="absolute w-screen h-screen flex items-center justify-center top-0 text-white">
@@ -12,27 +28,40 @@ function ModalAfiliados({ openModal, closeModal, seleccionado }) {
         <div className="flex flex-col w-full gap-2">
           <label className="flex flex-col">
             Nombre
-            <input type="text" className="rounded-md px-2 py-1 text-black" />
+            <input
+              type="text"
+              className="rounded-md px-2 py-1 text-black"
+              defaultValue={nombre}
+            />
           </label>
           <label className="flex flex-col">
             Apellido
-            <input type="text" className="rounded-md px-2 py-1 text-black" />
+            <input
+              type="text"
+              className="rounded-md px-2 py-1 text-black"
+              defaultValue={apellido}
+            />
           </label>
           <label className="flex flex-col">
             Dni
-            <input type="number" className="rounded-md px-2 py-1 text-black" />
+            <input
+              type="number"
+              className="rounded-md px-2 py-1 text-black"
+              defaultValue={dni}
+            />
           </label>
           <label className="flex flex-col">
             Nacimiento
-            <input type="number" className="rounded-md px-2 py-1 text-black" />
+            <input
+              type="date"
+              className="rounded-md px-2 py-1 text-black"
+              defaultValue={nacimiento}
+            />
           </label>
-          <div className="flex w-full ">
+          <div className="flex w-full">
             <label className="flex flex-col w-4/5">
               Empresa
-              <input
-                type="number"
-                className="rounded-md px-2 py-1 text-black"
-              />
+              <input className="rounded-md px-2 py-1 text-black" />
             </label>
             <label className="flex flex-col w-fit">
               Activo
