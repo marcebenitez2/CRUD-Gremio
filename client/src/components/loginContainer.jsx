@@ -9,8 +9,12 @@ function LoginContainer() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      return alert("Por favor ingrese todos los campos");
+    }
+
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -21,8 +25,13 @@ function LoginContainer() {
       }
       const data = await response.json();
 
-      const emailResponse = data.email;
-      const usernameResponse = data.username;
+      if (!data.length) {
+        return alert("Usuario o contraseña incorrectos");
+      }
+
+      const emailResponse = data[0].email;
+      const usernameResponse = data[0].username;
+
       saveLocalStorage(emailResponse, usernameResponse);
 
       window.location.href = "/menu";
@@ -41,6 +50,7 @@ function LoginContainer() {
         <label>
           Correo electronico
           <input
+            value={email}
             type="text"
             className="w-full py-2 bg-transparent border rounded-xl px-2  border-black"
             onChange={(e) => setEmail(e.target.value)}

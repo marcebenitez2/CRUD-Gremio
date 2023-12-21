@@ -1,7 +1,7 @@
 import userModel from "../model/userModel.js";
 
 const loginController = {
-  login: async (req, res) => {
+  login: async (req, res,next) => {
     try {
       const { email, password } = req.body;
       if (!email || !password) {

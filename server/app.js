@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Configuracion de rutas
-app.use("/api/login", loginRoute);
+// Cada vez que se haga una consulta a "http://localhost:3000/" se llamara al enrutador para ver como se prosigue con lo que se solicita
+app.use("/", loginRoute);
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {
