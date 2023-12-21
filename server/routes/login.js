@@ -6,6 +6,6 @@ const router = express.Router();
 
 // Definir las rutas y los controladores
 
-router.post("/login", loginController.login);
+router.post("/", loginController.login);
 
 export default router;

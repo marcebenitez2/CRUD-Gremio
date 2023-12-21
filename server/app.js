@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import loginRoute from "./routes/login.js";
+import afiliadosRoute from "./routes/afiliados.js";
 
 // Crear la aplicacion express
 const app = express();
@@ -11,7 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 // Cada vez que se haga una consulta a "http://localhost:3000/" se llamara al enrutador para ver como se prosigue con lo que se solicita
-app.use("/", loginRoute);
+app.use("/login", loginRoute);
+
+// app.use('/afiliados',)
+app.use("/afiliados", afiliadosRoute);
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {
