@@ -1,11 +1,15 @@
-export const fetchdb = async (url, setState) => {
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export const fetchdb = async (url) => {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  const data = await response.json();
-  console.log(data);
+    const data = await response.json();
+    return(data);
+  } catch (error) {
+    console.log(error);
+  }
 };

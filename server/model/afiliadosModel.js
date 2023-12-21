@@ -2,7 +2,7 @@ import { pool } from "../db/db.js";
 
 const afiliadosModel = {
   findAll: async () => {
-    const result = await pool.query("SELECT * FROM afiliados");
+    const [result] = await pool.query("SELECT members.*, companies.name AS company_name FROM members JOIN companies ON members.id_company = companies.id");
     return result;
   },
   create: async (afiliado) => {

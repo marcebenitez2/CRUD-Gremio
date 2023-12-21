@@ -7,10 +7,20 @@ import { useEffect } from "react";
 import { fetchdb } from "../services/fetchdb";
 
 function Afiliados() {
-  const [afiliados, setAfiliados] = useState([]);
+  const [afiliados, setAfiliados] = useState(null);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetchdb("http://localhost:3000/afiliados", setAfiliados);
+    fetchdb("http://localhost:3000/afiliados")
+      .then((data) => {
+        setAfiliados(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setCargando(false);
+      });
   }, []);
 
   return (
@@ -19,7 +29,11 @@ function Afiliados() {
         <IoMdArrowRoundBack className="text-5xl absolute left-10 top-6 text-red-600 hover:text-[#B31312] transition-all duration-300" />
       </Link>
       <h1 className="font-semibold text-4xl">Afiliados</h1>
-      <AfiliadosContainer afiliadosArray={afiliados}/>
+      {cargando ? (
+        <p>Cargando...</p>
+      ) : (
+        <AfiliadosContainer afiliadosArray={afiliados} />
+      )}
     </main>
   );
 }
