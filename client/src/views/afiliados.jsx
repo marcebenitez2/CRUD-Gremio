@@ -23,9 +23,7 @@ function Afiliados() {
   useEffect(() => {
     fetchdb("http://localhost:3000/afiliados")
       .then((data) => {
-        const arrFormated = formattedDates(data);
-        console.log(arrFormated)
-        setAfiliados(arrFormated);
+        setAfiliados(data);
       })
       .catch((err) => {
         console.log(err);

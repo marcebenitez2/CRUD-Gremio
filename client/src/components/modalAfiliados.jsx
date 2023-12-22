@@ -8,17 +8,11 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
     seleccionado ? seleccionado.surname : ""
   );
   const [dni, setDni] = useState(seleccionado ? seleccionado.dni : "");
-  const [nacimiento, setNacimiento] = useState(
-    seleccionado ? seleccionado.birth : ""
-  );
+  const [nacimiento, setNacimiento] = useState("");
   const [empresa, setEmpresa] = useState(
     seleccionado ? seleccionado.company_name : ""
   );
   const [activo, setActivo] = useState(seleccionado ? seleccionado.state : "");
-
-  useEffect(() => {
-    console.log(typeof nacimiento);
-  }, [nacimiento]);
 
   const cerrarModal = () => {
     setNombre("");
@@ -30,13 +24,8 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
     closeModal(!openModal);
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
+  console.log(seleccionado)
+
 
   return (
     <div className="absolute w-screen h-screen flex items-center justify-center top-0 text-white">
@@ -50,7 +39,8 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="text"
               className="rounded-md px-2 py-1 text-black"
-              defaultValue={nombre}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
             />
           </label>
           <label className="flex flex-col">
@@ -58,7 +48,8 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="text"
               className="rounded-md px-2 py-1 text-black"
-              defaultValue={apellido}
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
             />
           </label>
           <label className="flex flex-col">
@@ -66,7 +57,8 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="number"
               className="rounded-md px-2 py-1 text-black"
-              defaultValue={dni}
+              value={dni}
+              onChange={(e) => setDni(e.target.value)}
             />
           </label>
           <label className="flex flex-col">
@@ -74,16 +66,22 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="date"
               className="rounded-md px-2 py-1 text-black"
-              defaultValue={seleccionado ? seleccionado.birth : ""}
+              value={seleccionado ? seleccionado.birth : null}
               onChange={(e) => setNacimiento(e.target.value)}
             />
           </label>
           <div className="flex w-full">
             <label className="flex flex-col w-4/5">
               Empresa
-              <select className="text-black rounded-md py-1">
+              <select
+                className="text-black rounded-md py-1"
+                value={empresa}
+                onChange={(e) => setEmpresa(e.target.value)}
+              >
                 {empresas.map((empresa) => (
-                  <option key={empresa.id}>{empresa.name}</option>
+                  <option key={empresa.id} value={empresa.id}>
+                    {empresa.name}
+                  </option>
                 ))}
               </select>
             </label>
