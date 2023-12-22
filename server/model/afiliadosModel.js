@@ -22,11 +22,21 @@ const afiliadosModel = {
       };
     });
 
-    console.log(formattedResult);
     return formattedResult;
   },
   create: async (afiliado) => {
-    const result = await pool.query(/* tu consulta de creación aquí */);
+    const datos = [
+      afiliado.name,
+      afiliado.surname,
+      afiliado.dni,
+      afiliado.id_company,
+      afiliado.birth,
+      afiliado.state,
+    ];
+    const result = await pool.query(
+      `INSERT INTO members (name, surname, dni, id_company, birth, state) VALUES (?,?,?,?,?,?)`,
+      datos
+    );
     return result;
   },
   update: async (afiliado) => {

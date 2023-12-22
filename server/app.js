@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configuracion de middlewares
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173"}));
 app.use(express.json());
 
 // Cada vez que se haga una consulta a "http://localhost:3000/" se llamara al enrutador para ver como se prosigue con lo que se solicita

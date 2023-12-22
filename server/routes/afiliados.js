@@ -7,7 +7,7 @@ const router = express.Router();
 // Definir las rutas y los controladores
 router.get("/", afiliadosController.findAll);
 
-router.post("/create", afiliadosController.create);
+router.post("/", afiliadosController.create);
 
 router.put("/update", afiliadosController.update);
 
