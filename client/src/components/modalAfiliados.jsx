@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
+function ModalAfiliados({
+  openModal,
+  closeModal,
+  seleccionado,
+  empresas,
+  setSeleccionado,
+}) {
   if (!openModal) return null;
 
   const [nombre, setNombre] = useState(seleccionado ? seleccionado.name : "");
@@ -12,7 +18,9 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
   const [empresa, setEmpresa] = useState(
     seleccionado ? seleccionado.company_name : ""
   );
-  const [activo, setActivo] = useState(seleccionado ? seleccionado.state : "");
+  const [activo, setActivo] = useState(
+    seleccionado ? seleccionado.state : false
+  );
 
   const cerrarModal = () => {
     setNombre("");
@@ -21,11 +29,9 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
     setNacimiento("");
     setEmpresa("");
     setActivo("");
+    setSeleccionado(null);
     closeModal(!openModal);
   };
-
-  console.log(seleccionado)
-
 
   return (
     <div className="absolute w-screen h-screen flex items-center justify-center top-0 text-white">
@@ -66,7 +72,7 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="date"
               className="rounded-md px-2 py-1 text-black"
-              value={seleccionado ? seleccionado.birth : null}
+              value={nacimiento}
               onChange={(e) => setNacimiento(e.target.value)}
             />
           </label>
@@ -87,7 +93,12 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             </label>
             <label className="flex flex-col w-fit">
               Activo
-              <input type="checkbox" className="h-6" />
+              <input
+                type="checkbox"
+                className="h-6"
+                checked={activo}
+                onChange={() => setActivo(!activo)}
+              />
             </label>
           </div>
         </div>

@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { fetchdb } from "../services/fetchdb";
 import { IoMdAdd } from "react-icons/io";
 import ModalAfiliados from "../components/modalAfiliados";
-import { formattedDates } from "../services/formatted";
 
 function Afiliados() {
   const [afiliados, setAfiliados] = useState(null);
@@ -82,6 +81,7 @@ function Afiliados() {
         closeModal={setOpenModal}
         seleccionado={seleccionado}
         empresas={empresas}
+        setSeleccionado={setSeleccionado}
       />
     </main>
   );

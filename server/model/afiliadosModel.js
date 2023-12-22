@@ -4,7 +4,7 @@ const afiliadosModel = {
   findAll: async () => {
     const query = `
       SELECT
-        members.id, members.name, members.surname, members.dni, members.id_company, DATE_FORMAT(members.birth, '%d/%m/%Y') as birth,
+        members.id, members.name, members.surname, members.dni, members.id_company, DATE_FORMAT(members.birth, '%d/%m/%Y') as birth, members.state,
         companies.name AS company_name
       FROM
         members
@@ -14,8 +14,16 @@ const afiliadosModel = {
 
     const [result] = await pool.query(query);
 
-    console.log(result)
-    return result;
+    // Modificar el valor de members.state en cada objeto del resultado
+    const formattedResult = result.map((afiliado) => {
+      return {
+        ...afiliado,
+        state: afiliado.state === 1, // Convertir 1 a true, 0 a false
+      };
+    });
+
+    console.log(formattedResult);
+    return formattedResult;
   },
   create: async (afiliado) => {
     const result = await pool.query(/* tu consulta de creación aquí */);
