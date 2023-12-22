@@ -1,10 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
   if (!openModal) return null;
-
-  console.log(seleccionado);
 
   const [nombre, setNombre] = useState(seleccionado ? seleccionado.name : "");
   const [apellido, setApellido] = useState(
@@ -18,6 +15,28 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
     seleccionado ? seleccionado.company_name : ""
   );
   const [activo, setActivo] = useState(seleccionado ? seleccionado.state : "");
+
+  useEffect(() => {
+    console.log(typeof nacimiento);
+  }, [nacimiento]);
+
+  const cerrarModal = () => {
+    setNombre("");
+    setApellido("");
+    setDni("");
+    setNacimiento("");
+    setEmpresa("");
+    setActivo("");
+    closeModal(!openModal);
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   return (
     <div className="absolute w-screen h-screen flex items-center justify-center top-0 text-white">
@@ -55,13 +74,18 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
             <input
               type="date"
               className="rounded-md px-2 py-1 text-black"
-              defaultValue={nacimiento}
+              defaultValue={seleccionado ? seleccionado.birth : ""}
+              onChange={(e) => setNacimiento(e.target.value)}
             />
           </label>
           <div className="flex w-full">
             <label className="flex flex-col w-4/5">
               Empresa
-              <input className="rounded-md px-2 py-1 text-black" />
+              <select className="text-black rounded-md py-1">
+                {empresas.map((empresa) => (
+                  <option key={empresa.id}>{empresa.name}</option>
+                ))}
+              </select>
             </label>
             <label className="flex flex-col w-fit">
               Activo
@@ -72,7 +96,7 @@ function ModalAfiliados({ openModal, closeModal, seleccionado, empresas }) {
         <div className="flex h-10 w-full justify-center items-center gap-10">
           <button
             className="h-full w-32 smn:w-full font-semibold"
-            onClick={() => closeModal(!openModal)}
+            onClick={() => cerrarModal()}
           >
             Cerrar
           </button>

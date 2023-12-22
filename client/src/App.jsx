@@ -10,13 +10,36 @@ import Menu from "./views/menu";
 import Afiliados from "./views/afiliados";
 import Error from "./views/error";
 
+function RequireAuth({ children }) {
+  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
+  if (!username || !email) {
+    window.location.href = "/";
+  }
+  return children;
+}
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/menu/afiliados" element={<Afiliados />} />
+        <Route
+          path="/menu"
+          element={
+            <RequireAuth>
+              <Menu />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/menu/afiliados"
+          element={
+            <RequireAuth>
+              <Afiliados />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

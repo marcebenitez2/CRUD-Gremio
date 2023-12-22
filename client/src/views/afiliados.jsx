@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { fetchdb } from "../services/fetchdb";
 import { IoMdAdd } from "react-icons/io";
 import ModalAfiliados from "../components/modalAfiliados";
+import { formattedDates } from "../services/formatted";
 
 function Afiliados() {
   const [afiliados, setAfiliados] = useState(null);
@@ -22,7 +23,9 @@ function Afiliados() {
   useEffect(() => {
     fetchdb("http://localhost:3000/afiliados")
       .then((data) => {
-        setAfiliados(data);
+        const arrFormated = formattedDates(data);
+        console.log(arrFormated)
+        setAfiliados(arrFormated);
       })
       .catch((err) => {
         console.log(err);
@@ -30,6 +33,7 @@ function Afiliados() {
       .finally(() => {
         setCargando(false);
       });
+      
 
     fetchdb("http://localhost:3000/empresas")
       .then((data) => {
@@ -43,9 +47,13 @@ function Afiliados() {
       });
   }, []);
 
+
   useEffect(() => {
-    setOpenModal(true);
+    if (seleccionado !== null) {
+      setOpenModal(true);
+    }
   }, [seleccionado]);
+  
 
   return (
     <main className="bg-zinc-900 w-screen h-screen">
