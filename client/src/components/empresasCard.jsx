@@ -31,7 +31,7 @@ function EmpresasCard({ empresas }) {
       };
       console.log(datos);
       enviarDB(datos, `http://localhost:3000/empresas/${datos.id}`, "PUT");
-      // window.location.reload();
+      window.location.reload();
     } else {
       const datos = {
         name: nombre,
@@ -41,7 +41,7 @@ function EmpresasCard({ empresas }) {
         num_idem: num_idem,
       };
       enviarDB(datos, "http://localhost:3000/empresas");
-      // window.location.reload();
+      window.location.reload();
     }
   };
 
