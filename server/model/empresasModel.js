@@ -5,12 +5,30 @@ const empresasModel = {
     const [result] = await pool.query("SELECT * FROM companies");
     return result;
   },
+
   create: async (empresa) => {
-    const result = await pool.query();
+    const datos = Object.values(empresa);
+    console.log(datos);
+    const result = await pool.query(
+      "INSERT INTO companies (name, address, tel, email, num_idem) VALUES (?,?,?,?,?)",
+      datos
+    );
     return result;
   },
-  update: async (empresa) => {
-    const result = await pool.query();
+
+  update: async (empresa, id) => {
+    const datos = [
+      empresa.name,
+      empresa.address,
+      empresa.tel,
+      empresa.email,
+      empresa.num_idem,
+      id,
+    ];
+    const result = await pool.query(
+      "UPDATE companies SET name = ?, address = ?, tel = ?, email = ?, num_idem = ? WHERE id = ?",
+      datos
+    );
     return result;
   },
   delete: async (empresa) => {

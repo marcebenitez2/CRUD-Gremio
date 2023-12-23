@@ -24,6 +24,8 @@ const afiliadosModel = {
 
     return formattedResult;
   },
+
+
   create: async (afiliado) => {
     const datos = [
       afiliado.name,
@@ -39,6 +41,8 @@ const afiliadosModel = {
     );
     return result;
   },
+
+  
   update: async (afiliado, id) => {
     const result = await pool.query(
       `UPDATE members SET name = ?, surname = ?, dni = ?, id_company = ?, birth = ?, state = ? WHERE id = ?`,
