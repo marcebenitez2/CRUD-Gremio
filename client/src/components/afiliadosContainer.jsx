@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 function AfiliadosContainer({ afiliadosArray, setSeleccionado }) {
   const [buscador, setBuscador] = useState("");
-  const [afiliadosFiltrados, setAfiliadosFiltrados] = useState(afiliadosArray);
+  const [afiliadosFiltrados, setAfiliadosFiltrados] = useState(afiliadosArray ?? []);
+
 
   useEffect(() => {
     const filtroMinusculas = buscador.toLowerCase().trim();
@@ -42,32 +43,29 @@ function AfiliadosContainer({ afiliadosArray, setSeleccionado }) {
               <th className="w-1/6">Estado</th>
             </tr>
           </thead>
-          {afiliadosFiltrados.length === 0 ? (
-            <p>Cargando...</p>
-          ) : (
-            <tbody>
-              {afiliadosFiltrados.map((x) => (
-                <tr
-                  key={x.id}
-                  className="text-center hover:bg-red-800 transition-all duration-100 cursor-pointer"
-                  onClick={() => setSeleccionado(x)}
+
+          <tbody>
+            {afiliadosFiltrados?.map((x) => (
+              <tr
+                key={x.id}
+                className="text-center hover:bg-red-800 transition-all duration-100 cursor-pointer"
+                onClick={() => setSeleccionado(x)}
+              >
+                <td className="border border-zinc-500">{x.name}</td>
+                <td className="border border-zinc-500">{x.surname}</td>
+                <td className="border border-zinc-500">{x.dni}</td>
+                <td className="border border-zinc-500">{x.birth}</td>
+                <td className="border border-zinc-500">{x.company_name}</td>
+                <td
+                  className={`border border-zinc-500 ${
+                    x.state === true ? "bg-green-700" : "bg-red-700"
+                  }`}
                 >
-                  <td className="border border-zinc-500">{x.name}</td>
-                  <td className="border border-zinc-500">{x.surname}</td>
-                  <td className="border border-zinc-500">{x.dni}</td>
-                  <td className="border border-zinc-500">{x.birth}</td>
-                  <td className="border border-zinc-500">{x.company_name}</td>
-                  <td
-                    className={`border border-zinc-500 ${
-                      x.state === true ? "bg-green-700" : "bg-red-700"
-                    }`}
-                  >
-                    {x.state === true ? "Activo" : "Inactivo"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          )}
+                  {x.state === true ? "Activo" : "Inactivo"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

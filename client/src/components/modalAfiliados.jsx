@@ -37,16 +37,17 @@ function ModalAfiliados({
       id_company: Number(idEmpresa),
       state: activo,
     };
-    
+
     console.log(datos);
 
     if (!datos.id) {
       enviarDB(datos, "http://localhost:3000/afiliados");
+      window.location.reload();
     } else {
       enviarDB(datos, `http://localhost:3000/afiliados/${datos.id}`, "PUT");
+      window.location.reload();
     }
   };
-
 
   const cerrarModal = () => {
     setNombre("");
@@ -58,8 +59,6 @@ function ModalAfiliados({
     setSeleccionado(null);
     closeModal(!openModal);
   };
-
-
 
   return (
     <div className="absolute w-screen h-screen flex items-center justify-center top-0 text-white">
@@ -133,6 +132,7 @@ function ModalAfiliados({
             </label>
           </div>
         </div>
+        <button type="submit" style={{ display: "none" }} />
         <div className="flex h-10 w-full justify-center items-center gap-10">
           <button
             className="h-full w-32 smn:w-full font-semibold"

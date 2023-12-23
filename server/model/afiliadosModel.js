@@ -4,12 +4,12 @@ const afiliadosModel = {
   findAll: async () => {
     const query = `
       SELECT
-        members.id, members.name, members.surname, members.dni, members.id_company, DATE_FORMAT(members.birth, '%d/%m/%Y') as birth, members.state,
+        members.id, members.name, members.surname, members.dni, members.id_company, DATE_FORMAT(members.birth, '%Y-%m-%d') as birth, members.state,
         companies.name AS company_name
       FROM
         members
       JOIN
-        companies ON members.id_company = companies.id;
+        companies ON members.id_company = companies.id ORDER BY members.id DESC;
     `;
 
     const [result] = await pool.query(query);
@@ -39,8 +39,19 @@ const afiliadosModel = {
     );
     return result;
   },
-  update: async (afiliado) => {
-    const result = await pool.query(/* tu consulta de actualización aquí */);
+  update: async (afiliado, id) => {
+    const result = await pool.query(
+      `UPDATE members SET name = ?, surname = ?, dni = ?, id_company = ?, birth = ?, state = ? WHERE id = ?`,
+      [
+        afiliado.name,
+        afiliado.surname,
+        afiliado.dni,
+        afiliado.id_company,
+        afiliado.birth,
+        afiliado.state,
+        id,
+      ]
+    );
     return result;
   },
   delete: async (afiliado) => {

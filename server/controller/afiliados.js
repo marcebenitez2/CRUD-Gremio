@@ -19,9 +19,10 @@ const afiliadosController = {
     }
   },
   update: async (req, res, next) => {
+    const id = req.params.id;
     try {
       const afiliado = req.body;
-      const result = await afiliadosModel.update(afiliado);
+      const result = await afiliadosModel.update(afiliado, id);
       res.json(result);
     } catch (error) {
       next(error);
