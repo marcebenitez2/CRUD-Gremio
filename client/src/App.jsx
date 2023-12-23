@@ -9,6 +9,7 @@ import Login from "./views/login";
 import Menu from "./views/menu";
 import Afiliados from "./views/afiliados";
 import Error from "./views/error";
+import Empresas from "./views/empresas";
 
 function RequireAuth({ children }) {
   const username = localStorage.getItem("username");
@@ -37,6 +38,14 @@ function App() {
           element={
             <RequireAuth>
               <Afiliados />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/menu/empresas"
+          element={
+            <RequireAuth>
+              <Empresas />
             </RequireAuth>
           }
         />
