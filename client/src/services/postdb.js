@@ -1,7 +1,7 @@
-export const enviarDB = async (data,url) => {
+export const enviarDB = async (data,url,metodo) => {
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: metodo ? metodo : "POST",
       headers: {
         "Content-Type": "application/json",
       },

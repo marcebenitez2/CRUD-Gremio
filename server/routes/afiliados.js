@@ -9,7 +9,7 @@ router.get("/", afiliadosController.findAll);
 
 router.post("/", afiliadosController.create);
 
-router.put("/update", afiliadosController.update);
+router.put("/:id", afiliadosController.update);
 
 router.delete("/delete", afiliadosController.delete);
 

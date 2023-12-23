@@ -37,11 +37,13 @@ function ModalAfiliados({
       id_company: Number(idEmpresa),
       state: activo,
     };
-
+    
     console.log(datos);
 
     if (!datos.id) {
       enviarDB(datos, "http://localhost:3000/afiliados");
+    } else {
+      enviarDB(datos, `http://localhost:3000/afiliados/${datos.id}`, "PUT");
     }
   };
 
