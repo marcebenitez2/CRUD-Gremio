@@ -13,8 +13,10 @@ function LoginContainer() {
       return alert("Por favor ingrese todos los campos");
     }
 
+    console.log(email, password);
+
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://crud-gremio-production.up.railway.app/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

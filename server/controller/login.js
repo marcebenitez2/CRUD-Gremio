@@ -4,6 +4,8 @@ const loginController = {
   login: async (req, res,next) => {
     try {
       const { email, password } = req.body;
+
+      console.log(email, password)
       if (!email || !password) {
         throw new Error("Email and password are required");
       }
