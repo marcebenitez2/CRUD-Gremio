@@ -3,13 +3,14 @@ import cors from "cors";
 import loginRoute from "./routes/login.js";
 import afiliadosRoute from "./routes/afiliados.js";
 import empresasRoute from "./routes/empresas.js";
+import bolsonRoute from "./routes/bolson.js";
 
 // Crear la aplicacion express
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configuracion de middlewares
-app.use(cors({ origin: "http://localhost:5173"}));
+app.use(cors({ origin: "*"}));
 app.use(express.json());
 
 // Cada vez que se haga una consulta a "http://localhost:3000/" se llamara al enrutador para ver como se prosigue con lo que se solicita
@@ -19,6 +20,8 @@ app.use("/login", loginRoute);
 app.use("/afiliados", afiliadosRoute);
 
 app.use("/empresas",empresasRoute)
+
+app.use('/bolson',bolsonRoute)
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {
