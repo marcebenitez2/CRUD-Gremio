@@ -10,6 +10,7 @@ import Menu from "./views/menu";
 import Afiliados from "./views/afiliados";
 import Error from "./views/error";
 import Empresas from "./views/empresas";
+import Bolson from "./views/bolson";
 
 function RequireAuth({ children }) {
   const username = localStorage.getItem("username");
@@ -46,6 +47,14 @@ function App() {
           element={
             <RequireAuth>
               <Empresas />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/menu/bolson"
+          element={
+            <RequireAuth>
+              <Bolson />
             </RequireAuth>
           }
         />

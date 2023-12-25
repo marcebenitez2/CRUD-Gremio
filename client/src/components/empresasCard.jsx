@@ -82,18 +82,18 @@ function EmpresasCard({ empresas }) {
                 key={empresa.id}
                 className={`${
                   seleccionado?.id === empresa.id ? "bg-red-800" : ""
-                } hover:bg-red-800 transition-all duration-100 cursor-pointer`}
+                } hover:bg-red-800 transition-all duration-100 cursor-pointer `}
                 onClick={() => {
                   setSeleccionado((prevSeleccionado) =>
                     prevSeleccionado === empresa ? null : empresa
                   );
                 }}
               >
-                <td>{empresa.name}</td>
-                <td>{empresa.address}</td>
-                <td>{empresa.tel}</td>
-                <td>{empresa.email}</td>
-                <td>{empresa.num_idem}</td>
+                <td className="border border-zinc-600 px-1">{empresa.name}</td>
+                <td className="border border-zinc-600 px-1">{empresa.address}</td>
+                <td className="border border-zinc-600 px-1">{empresa.tel}</td>
+                <td className="border border-zinc-600 px-1">{empresa.email}</td>
+                <td className="border border-zinc-600 px-1">{empresa.num_idem}</td>
               </tr>
             ))}
           </tbody>
