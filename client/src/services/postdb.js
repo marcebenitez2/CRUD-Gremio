@@ -1,4 +1,5 @@
 export const enviarDB = async (data,url,metodo) => {
+  console.log(data);
   try {
     const response = await fetch(url, {
       method: metodo ? metodo : "POST",

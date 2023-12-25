@@ -30,8 +30,8 @@ function EmpresasCard({ empresas }) {
         num_idem: num_idem,
       };
       console.log(datos);
-      enviarDB(datos, `http://localhost:3000/empresas/${datos.id}`, "PUT");
-      window.location.reload();
+      enviarDB(datos, `https://crud-gremio-production.up.railway.app/empresas/${datos.id}`, "PUT");
+      // window.location.reload();
     } else {
       const datos = {
         name: nombre,
@@ -40,8 +40,8 @@ function EmpresasCard({ empresas }) {
         email: email,
         num_idem: num_idem,
       };
-      enviarDB(datos, "http://localhost:3000/empresas");
-      window.location.reload();
+      enviarDB(datos, "https://crud-gremio-production.up.railway.app/empresas");
+      // window.location.reload();
     }
   };
 

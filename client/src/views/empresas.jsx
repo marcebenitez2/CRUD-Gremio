@@ -11,7 +11,7 @@ function Empresas() {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetchdb("http://localhost:3000/empresas")
+    fetchdb("https://crud-gremio-production.up.railway.app/empresas")
       .then((data) => {
         setEmpresas(data);
       })
