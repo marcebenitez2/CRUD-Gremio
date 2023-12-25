@@ -11,6 +11,7 @@ const empresasController = {
   },
 
   create: async (req, res, next) => {
+    console.log(req.body)
     try {
       const empresa = await empresasModel.create(req.body);
       res.json(empresa);
